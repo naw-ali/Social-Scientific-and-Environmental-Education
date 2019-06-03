@@ -8,7 +8,8 @@
         Nauzeer Mohammad Nawfal Ali
     </author>
     <content src="index.html" />
-  <access origin="*" />  <plugin name="cordova-plugin-whitelist" version="1" />
+  <access origin="*" />  
+  <plugin name="cordova-plugin-whitelist" version="1" />
 
 <allow-intent href="http://*/*" />
 <allow-intent href="https://*/*" />
@@ -16,19 +17,23 @@
 <allow-intent href="sms:*" />
 <allow-intent href="mailto:*" />
 <allow-intent href="geo:*" />
+    <plugin name="cordova-plugin-geolocation" spec="~4">
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="This app uses your location for maps." />
+    </plugin>
 <platform name="android">
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <allow-intent href="market:*" />
     
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
     
               <icon src="images/SSEE.png" density="ldpi" />
               <icon src="images/SSEE.png" density="mdpi" />
               <icon src="images/SSEE.png" density="hdpi" />
               <icon src="images/SSEE.png" density="xhdpi" />
 </platform>
-    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    
     
 <platform name="ios">
     <allow-intent href="itms:*" />
