@@ -27,6 +27,9 @@
               <icon src="images/SSEE.png" density="xhdpi" />
 </platform>
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 <platform name="ios">
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
