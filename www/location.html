@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Location</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script  src="jquery.js"></script>
+<script  src="jquery.mobile-1.4.5.js"></script>
+<link rel="stylesheet"  href="jquery.mobile-1.4.5.css">
+
+<link rel="stylesheet" href="leaflet/leaflet.css"/>
+<script src="leaflet/leaflet.js"></script>
+<link rel="stylesheet" href="leaflet/leaflet-routing-machine.css"/>
+<script src="leaflet/leaflet-routing-machine.js"></script>
+<script>
+
+
+</script>
+
+</head>
+
+<body>
+
+  <div data-role="page" id="pageone" data-theme="a">
+
+    <div data-role="header">
+      
+
+      <div data-role="navbar">
+        <ul>
+          <li><a href="index.html" rel="external" style="background-color: tomato;" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+          <li><a href="index.html#pagetwo" rel="external" style="background-color: #3982dc;" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+          <li><a href="weather-menu.html" style="background-color: #f1f105c9;" rel="external" class="ui-btn ui-icon-home ui-btn-icon-top">Weather</a></li>
+          <li><a href="quiz.html" style="background-color: #1aa91a;" rel="external" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+        </ul> 
+      </div>
+
+    </div>
+    <div role="main" class="ui-content">
+      <div id="mapid" style="width: 100%; height: 600px;"></div>
+      <button onclick="getLocation()" text="myLoc">Get Direction</button>
+      <a rel="external" class="ui-btn" href="index.html#pagehistory">Back</a>
+    </div>
+    <script>
+
+
+
+    </script>
+
+
+  </div>
+ 
+ <!--<button onclick="getLocation();">Get Direction</button>-->
+
+ <script>
+var mymap;
+var loclongitude;
+var loclatitude;
+var myLatitude;
+var myLongitude;
+
+
+
+function getLocation(){
+if(navigator.geolocation == undefined){ 
+    alert("Geolocation undefined");
+  }else{
+    alert("Geolocation available");
+    navigator.geolocation.getCurrentPosition(userLocated,locationError);
+  };
+}
+
+  function userLocated(position){
+    myLatitude = position.coords.latitude;
+    myLongitude = position.coords.longitude;
+    alert("Lat: "+myLatitude+", Long: "+myLongitude);
+    
+
+  var marker1 = L.marker([myLatitude,myLongitude]).addTo(mymap);
+  var circle1 = L.circle([myLatitude, myLongitude], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 10
+}).addTo(mymap);
+
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(mymap);
+//alert(loclongitude);
+//alert(loclatitude);
+L.Routing.control({
+    waypoints: [
+        L.latLng(myLatitude, myLongitude),
+        L.latLng(loclatitude,loclongitude )
+    ]
+}).addTo(mymap);
+
+
+mymap.panTo(new L.LatLng(-20.280183, 57.560254));
+mymap.setZoom(10);
+
+};
+
+  function locationError(error){
+    switch(error.code){
+      case error.PERMISSION_DENIED:
+      alert("Permission Denied- "+error.message);
+      break;
+
+      case error.POSITION_UNAVAILABLE:
+      alert("Position Not Available-"+error.message);
+      break;
+
+      case error.TIMEOUT:
+      alert("Request Time out-"+error.message);
+      break;
+    }
+  };
+
+
+function f2()
+{
+  
+
+
+  var param = window.location.href.split( '?' );
+  var loc = param[1].split('&');
+  var long = loc[0].split('=');
+  
+  loclatitude = long[1];
+  var lat = loc[1].split('=')
+  
+  loclongitude = lat[1];
+
+};
+
+
+
+
+
+
+window.onload = function f1(){
+
+f2();
+//alert(loclongitude);
+//alert(loclatitude);
+
+mymap = L.map('mapid').setView([loclatitude,loclongitude], 18);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(mymap);
+
+
+var marker = L.marker([loclatitude,loclongitude]).addTo(mymap);
+marker.addTo(mymap);
+var circle = L.circle([loclatitude,loclongitude], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 10
+}).addTo(mymap);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+
+} 
+
+
+
+
+
+ </script>
+</body>
+
+
+</html>
