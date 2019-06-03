@@ -17,7 +17,7 @@
 <allow-intent href="sms:*" />
 <allow-intent href="mailto:*" />
 <allow-intent href="geo:*" />
-    <plugin name="cordova-plugin-geolocation" spec="~4">
+    <plugin name="cordova-plugin-geolocation" spec="~2">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="This app uses your location for maps." />
     </plugin>
 <platform name="android">
